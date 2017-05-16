@@ -1,2 +1,2 @@
 # Demos and Presentations
-Demo projects and presentations from various IPT events
+Demo projects and presentations from IPT events
