@@ -1,0 +1,20 @@
+.main-menu {
+  list-style-type: none;
+}
+.main-menu li{
+  display: inline-block;
+}
+
+.main-menu li:not(:first-child)::before {
+  content: "\00a0 | ";
+}
+
+.navbar-form, .navbar-form button {
+  display: inline-block;
+}
+
+.navbar-right {
+  float: right;
+  padding-right: 20px
+}
+
