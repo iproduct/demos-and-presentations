@@ -25,7 +25,7 @@ const enhance = compose(
 );
 
 const BookSearch = enhance(({ query, onQueryChange }) =>
-  <Card>
+  <Card style={{  background: '#fafafa' }}>
     <CardHeader
       title="Find Books"
       subtitle="with Google Books Service"

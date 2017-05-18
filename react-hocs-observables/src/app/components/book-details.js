@@ -3,14 +3,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
-import Authors from './authors';
 
 const BookPreview = ({ book, onBookSelected }) => (
   <NavLink to={`/book/${book.id}`}>
     <Card className='md-card'>
       <CardHeader
         title={book.volumeInfo.title}
-        subtitle={book.volumeInfo.subtitle}
+        subtitle={ book.volumeInfo.authors && <span><i>Author{book.volumeInfo.authors.length > 1? 's': ''}:</i> {book.volumeInfo.authors.join(', ')}</span> }
         avatar={book.volumeInfo.imageLinks &&
           <Avatar src={book.volumeInfo.imageLinks.smallThumbnail} className='thumbnail' style={{
             'borderRadius': '2px',
@@ -19,9 +18,8 @@ const BookPreview = ({ book, onBookSelected }) => (
           }} />
         }
         titleStyle={{
-          fontSize: '22px',
-          paddingBottom: '12px',
-          lineHeight: '24px'
+          fontSize: '18pt',
+          paddingBottom: '12px'
         }}
         subtitleStyle={{
           fontSize: '12pt'
@@ -31,12 +29,8 @@ const BookPreview = ({ book, onBookSelected }) => (
         }}
       />
       {book.volumeInfo.description &&
-        <CardText className="md-card-content" style={{ paddingTop: '0', textDecoration: 'none' }}>
+        <CardText className="md-card-content" style={{paddingTop: '0', textDecoration: 'none'}}>
           {book.volumeInfo.description}
-        </CardText>
-      }
-      {book.volumeInfo.authors &&
-        <CardText className="md-card-authors" style={{ paddingTop: '0', textDecoration: 'none' }}>
           <Authors book={book} />
         </CardText>
       }

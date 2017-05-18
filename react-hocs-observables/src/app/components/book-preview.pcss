@@ -4,13 +4,14 @@
       margin: 15px;
       overflow: hidden;
     }
+
 @media only screen and (max-width: 768px) {
   .md-card {
     margin: 15px 0 !important;
   }
 }
 .md-card:hover {
-  box-shadow: rgba(0, 0, 0, .5) 5px 5px 16px -2px, rgba(0, 0, 0, .4) 4px 4px 12px -2px !important;
+  box-shadow: rgba(0, 0, 0, .5) 5px 5px 16px -4px, rgba(0, 0, 0, .2) 3px 3px 8px -2px !important;
 }
 a, a:hover {
   color: inherit;
@@ -25,7 +26,7 @@ a, a:hover {
 
 $font-size: 14px;
 $line-height: 1.4;
-$lines-to-show: 8;
+$lines-to-show: 5;
 
 .md-card-content {
   margin-top: 0;
@@ -44,11 +45,4 @@ $lines-to-show: 8;
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
-}
-.md-card span {
-  display: inline-block;
-  font-size: 13px;
-}
-.md-card-footer {
-  padding: 0 25px 25px;
 }

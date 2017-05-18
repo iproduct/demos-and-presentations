@@ -1,0 +1,25 @@
+$font-size: 15px;
+$line-height: 1.4;
+$lines-to-show: 2;
+
+.authors-header {
+  margin-bottom: 5px;
+}
+
+.authors-text {
+  margin-top: 0;
+  padding-top: 0;
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  max-width: 400px;
+  height: calc(0.97*$font-size*$line-height*$lines-to-show); /* Fallback for non-webkit */
+  margin: 0 auto;
+  font-size: $font-size;
+  line-height: $line-height;
+  -webkit-line-clamp: $lines-to-show;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
