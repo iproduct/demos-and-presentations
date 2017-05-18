@@ -11,7 +11,7 @@ const search = action$ =>
     .map(action => action.query)
     .distinctUntilChanged()
     .do(query => console.log('Query:', query))
-    .dis
+    .distinctUntilChanged()
     .mergeMap(query =>
       ajax.getJSON(`${API_PATH}?q=${query}`)
         .map(response => searchComplete(response.items || []))
