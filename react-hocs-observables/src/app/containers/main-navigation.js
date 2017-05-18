@@ -46,11 +46,11 @@ export default class MainNavigation extends React.Component {
           iconClassNameRight="muidocs-icon-navigation-expand-more" />
 
         <Drawer open={isSidenavOpen} docked={false} className="app-drawer" onRequestChange={onCloseSidenav}>
-          <NavLink to="/collection">
-            <MenuItem leftIcon={<LibraryBooksIcon />} onTouchTap={onCloseSidenav}>My Collection</MenuItem>
-          </NavLink>
           <NavLink to="/search">
             <MenuItem leftIcon={<SearchIcon />} onTouchTap={onCloseSidenav}>Find Google Books</MenuItem>
+          </NavLink>
+          <NavLink to="/todos">
+            <MenuItem leftIcon={<LibraryBooksIcon />} onTouchTap={onCloseSidenav}>Todos Demo</MenuItem>
           </NavLink>
         </Drawer>
       </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import './app.css';
-import { Route } from 'react-router';
+import { Route, Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { withRouter } from 'react-router';
@@ -12,7 +12,9 @@ import MainNavigation from './containers/main-navigation';
 
 import TodoApp from './components/todo-app';
 import FindBookPage from './containers/find-book-page';
+import BookDetail from './containers/book-detail';
 import ShowTheLocation from './components/show-location';
+import { Switch } from 'react-router-dom';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -30,29 +32,14 @@ class App extends Component {
       <MuiThemeProvider>
         <div>
           <MainNavigation />
-          <ul className="main-menu">
-            {/*<li><NavLink exact to="/">Home</NavLink></li>
-            <li><NavLink to="/show-location">Show the Location</NavLink></li>
-            <li><Link to="/intro">Intro</Link></li>
-          <li><Link to="/repos">Repos</Link></li>
-          <li><Link to="/topics">Topics</Link></li>
-          <li><Link to="/show-location">Show the Location</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <form className="navbar-form navbar-right" role="search" onSubmit={this.handleSerch}>
-            <input type="text" placeholder="userName" className="form-control" /> / {' '}
-            <input type="text" placeholder="repo" className="form-control" />{' '}
-            <button type="submit" className="btn btn-default">Go</button>
-          </form> */}
-          </ul>
-          <hr />
-          <Route path="/collection" component={TodoApp} />
-          <Route path="/search" component={FindBookPage} />
-          <Route path="/preview/:bookId" component={FindBookPage} />
-        {/*<Route path="/intro" render={() => <div>How to start using this app</div>} />
-        <Route path="/repos" component={Repos} />
-        <Route path="/topics" component={Topics} />
-        <Route path="/about" component={About} />*/}
-          <Route path="/show-location" component={ShowTheLocation} />
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/search" />
+            </Route>
+            <Route path="/todos" component={TodoApp} />
+            <Route path="/search" component={FindBookPage} />
+            <Route path="/book/:bookId" component={BookDetail} />
+          </Switch>
         </div>
       </MuiThemeProvider>
     );

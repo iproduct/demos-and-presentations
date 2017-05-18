@@ -14,7 +14,7 @@ import TextField from 'material-ui/TextField';
 import {compose, withState, withHandlers} from 'recompose';
 
 const enhance = compose(
-  withState('query', 'updateQuery', ''),
+  withState('localQuery', 'updateQuery', ({query}) => query),
   withHandlers({
     onQueryChange: props => event => {
       const queryStr = event.target.value;
@@ -24,7 +24,7 @@ const enhance = compose(
   })
 );
 
-const BookSearch = enhance(({ query, onQueryChange }) =>
+const BookSearch = enhance(({ localQuery, onQueryChange }) =>
   <Card style={{  background: '#fafafa' }}>
     <CardHeader
       title="Find Books"
@@ -42,7 +42,7 @@ const BookSearch = enhance(({ query, onQueryChange }) =>
     />
     <CardText>
       <TextField
-        value={query}
+        value={localQuery}
         onChange={ onQueryChange }
         hintText="Type book title here ..."
         floatingLabelText="Book Title"

@@ -1,9 +1,12 @@
 import search from './search';
-import load from './load';
+import routing from './routing';
+import selectBook from './select-book';
 
 const epics = [
   search,
-  load
+  routing,
+  selectBook,
+
 ];
 
 export default epics;

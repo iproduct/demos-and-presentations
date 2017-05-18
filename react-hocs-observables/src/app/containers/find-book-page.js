@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { openSidenav, closeSidenav, searchForBook } from '../actions';
 import { isSidenavOpen } from '../reducers/sidenav-open';
-import { isLoading, getBookIds, getSearchResults } from '../reducers/search';
+import { isLoading, getBookIds, getSearchResults, getQuery } from '../reducers/search';
 import { getSelectedBook } from '../reducers/books';
 
 import AppBar from 'material-ui/AppBar';
@@ -18,21 +18,21 @@ import TextField from 'material-ui/TextField';
 
 import BookSearch from '../components/book-search';
 import BookPreviewList from '../components/book-preview-list';
-
-// const { handler: searchHandler, stream: searchQuery$ } = createEventHandler();
-// const { handler: booksHandler, stream: books$ } = createEventHandler();
-// const { handler: loadingHandler, stream: loading$ } = createEventHandler();
-
+import {selectBook} from '../actions/books';
 
 const mapStateToProps = (state) => ({
   isLoading: isLoading(state),
   books: getSearchResults(state),
-  selectedBook: getSelectedBook(state)
+  selectedBook: getSelectedBook(state),
+  query: getQuery(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onSearch: (query) => {
     dispatch(searchForBook(query));
+  },
+  onSelectBook: (bookId) => {
+    dispatch(selectBook(bookId));
   }
 });
 
@@ -44,9 +44,6 @@ export default class FindBookPage extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.searchQuery$ = searchQuery$;
-    // this.books$ = books$;
-    // this.loading$ = loading$;
   }
 
   render() {

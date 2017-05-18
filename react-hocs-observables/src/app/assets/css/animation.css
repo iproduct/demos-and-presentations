@@ -20,6 +20,28 @@
   transition: all 0.5s ease-in;
 }
 
+/* Book */
+.books-enter {
+  height: 0;
+  opacity: 0.01;
+  overflow: hidden;
+}
+
+.books-enter.books-enter-active {
+  height: auto;
+  opacity: 1;
+  transition: all 0.5s ease-in;
+}
+
+.books-leave {
+  opacity: 1;
+}
+
+.books-leave.books-leave-active {
+  opacity: 0.01;
+  transition: all 0.5s ease-in;
+}
+
 /* Chrome, Safari, Opera */
 @-webkit-keyframes fadein {
     from {

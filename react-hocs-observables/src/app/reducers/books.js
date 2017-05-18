@@ -1,10 +1,13 @@
-import { SEARCH, SEARCH_COMPLETE, LOAD_BOOK, LOAD_SUCCESS, SELECT_BOOK } from '../actions';
+import { SEARCH, SEARCH_COMPLETE, LOAD_SUCCESS, SELECT_BOOK, BOOK_LOADED, BOOK_REJECTED } from '../actions';
 import { createSelector } from 'reselect';
+import { SEARCH_REJECTED } from '../../../../../../../../Demos_and_Presentations/git/demos-and-presentations/react-hocs-observables/src/app/actions/books';
 
 const initialState = {
   ids: [],
   entities: {},
   selectedBookId: null,
+  loading: true,
+  error: false
 };
 
 export function books(state = initialState, action) {
@@ -22,25 +25,11 @@ export function books(state = initialState, action) {
     }, {});
 
     return {
-      ids: [ ...state.ids, ...newBookIds ],
+      ids: [...state.ids, ...newBookIds],
       entities: Object.assign({}, state.entities, newBookEntities),
-      selectedBookId: state.selectedBookId
-    };
-  }
-
-  case LOAD_BOOK: {
-    const book = action.book;
-
-    if (state.ids.indexOf(book.id) > -1) {
-      return state;
-    }
-
-    return {
-      ids: [ ...state.ids, book.id ],
-      entities: Object.assign({}, state.entities, {
-        [book.id]: book
-      }),
-      selectedBookId: state.selectedBookId
+      selectedBookId: state.selectedBookId,
+      loading: false,
+      error: false
     };
   }
 
@@ -48,8 +37,37 @@ export function books(state = initialState, action) {
     return {
       ids: state.ids,
       entities: state.entities,
-      selectedBookId: action.bookId
+      selectedBookId: action.bookId,
+      loading: !state.entities[action.bookId],
+      error: false
     };
+  }
+
+  case BOOK_LOADED: {
+    const book = action.book;
+
+    if (state.ids.indexOf(book) > -1) {
+      return state;
+    }
+
+    return {
+      ids: [...state.ids, book.id],
+      entities: Object.assign({}, state.entities, {
+        [book.id]: book
+      }),
+      selectedBookId: state.selectedBookId,
+      loading: false,
+      error: false
+    };
+  }
+
+  case BOOK_REJECTED: {
+    const payload = action.payload;
+
+    return Object.assign({}, state, {
+      loading: false,
+      error: payload
+    });
   }
 
   default: {
@@ -73,6 +91,10 @@ export const getIds = (state) => state.books.ids;
 
 export const getSelectedId = (state) => state.books.selectedBookId;
 
+export const isLoading = (state) => state.books.loading;
+
+export const getError = (state) => state.books.error;
+
 export const getSelectedBook = createSelector(getBookEntities, getSelectedId, (entities, selectedId) => {
   return entities[selectedId];
 });
@@ -80,3 +102,7 @@ export const getSelectedBook = createSelector(getBookEntities, getSelectedId, (e
 export const getAll = createSelector(getBookEntities, getIds, (entities, ids) => {
   return ids.map(id => entities[id]);
 });
+
+// Helpers
+export const isBookLoaged = (state, bookId) => state.books.ids.indexOf(bookId) > -1;
+export const getBookById = (state, bookId) => state.books.entities[bookId];

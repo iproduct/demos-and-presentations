@@ -8,11 +8,10 @@ const search = actions$ =>
   actions$
     .ofType(SEARCH)
     .debounceTime(300)
-    .map(action => action.query)
-    .distinctUntilChanged()
+    .map(action => action.query.trim())
     .do(query => console.log('Query:', query))
     .distinctUntilChanged()
-    .mergeMap(query => {
+    .switchMap(query => {
       if (query === '') {
         return Observable.empty();
       }

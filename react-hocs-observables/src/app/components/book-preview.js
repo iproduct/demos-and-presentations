@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import Authors from './authors';
-
-const BookPreview = ({ book, onBookSelected }) => (
-  <NavLink to={`/book/${book.id}`}>
+import striptags from 'striptags';
+const BookPreview = ({ book, onSelectBook }) => (
+  <NavLink to={`/book/${book.id}`} onClick={ () => onSelectBook(book.id) }>
     <Card className='md-card'>
       <CardHeader
         title={book.volumeInfo.title}
@@ -32,7 +32,7 @@ const BookPreview = ({ book, onBookSelected }) => (
       />
       {book.volumeInfo.description &&
         <CardText className="md-card-content" style={{ paddingTop: '0', textDecoration: 'none' }}>
-          {book.volumeInfo.description}
+          {striptags(book.volumeInfo.description)}
         </CardText>
       }
       {book.volumeInfo.authors &&
