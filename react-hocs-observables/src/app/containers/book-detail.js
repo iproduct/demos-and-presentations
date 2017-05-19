@@ -9,7 +9,6 @@ import Authors from '../components/authors';
 import getMarkdown from '../common/utils/get-markdown';
 import RaisedButton from 'material-ui/RaisedButton';
 import { goBack } from 'react-router-redux';
-import {searchForBook} from '../../../../../../../../Demos_and_Presentations/git/demos-and-presentations/react-hocs-observables/src/app/actions/books';
 
 const mapStateToProps = (state, props) => ({
   book: getSelectedBook(state),
