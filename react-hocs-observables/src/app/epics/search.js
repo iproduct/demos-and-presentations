@@ -17,10 +17,10 @@ const search = actions$ =>
       }
       console.log('Query to complete:', query);
 
-      const nextSearch$ = actions$.ofType(SEARCH).skip(1);
+      // const nextSearch$ = actions$.ofType(SEARCH).skip(1); //not needed if using switchMap, needed if we use mergeMap
 
       return ajax.getJSON(`${API_PATH}?q=${query}`)
-        .takeUntil(nextSearch$)
+        // .takeUntil(nextSearch$)                            //not needed if using switchMap, needed if we use mergeMap
         .map(response => searchComplete(response.items || []));
     }).catch(error => Observable.of(
       searchRejected(error.xhr.response)
